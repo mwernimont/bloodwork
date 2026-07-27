@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: theme.$bg-primary;
+  color: theme.$text-primary;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: theme.$selection-bg;
+  color: theme.$selection-text;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: theme.$scrollbar-track;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: theme.$scrollbar-thumb;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: theme.$scrollbar-thumb-hover;
+  }
+}
