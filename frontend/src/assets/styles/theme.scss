@@ -1,45 +1,47 @@
 // ============================================================
-// BLOODWORK — Clinical Noir Theme
+// BLOODWORK — Dark Slate Theme
 // SCSS variables for prose visualizer / reference tooling
 // ============================================================
 
 @use "sass:color";
 
 // ---- Base surfaces ----
-$bg-primary:        #0d0d0f;   // main background, near-black charcoal
-$bg-secondary:       #16161a;   // elevated panels, cards
-$bg-tertiary:        #1e1e23;   // nested panels, code blocks, inset areas
-$bg-hover:            #232329;   // hover state on interactive surfaces
-$bg-active:           #2a2a31;   // pressed/active state
+$bg-primary:        #0b0d11;   // main background, near-black navy
+$bg-secondary:       #171b22;   // elevated panels, cards — clear step up from primary
+$bg-tertiary:        #232935;   // nested panels, code blocks, inset areas
+$bg-hover:            #303744;   // hover state on interactive surfaces
+$bg-active:           #3d4655;   // pressed/active state
 
 // ---- Text ----
-$text-primary:        #e8e4dc;   // bone white — main body text
-$text-secondary:      #a8a49c;   // muted bone — secondary text, captions
-$text-tertiary:       #6e6b66;   // dim — placeholders, disabled text
-$text-inverse:        #0d0d0f;   // text on light/accent backgrounds
+$text-primary:        #e4e8ed;   // soft white — main body text
+$text-secondary:      #a3acb8;   // muted slate — secondary text, captions
+$text-tertiary:       #6b7480;   // dim — placeholders, disabled text
+$text-inverse:        #12151a;   // text on light/accent backgrounds
 
-// ---- Structural / chrome (steel blue-gray) ----
-$steel-100:           #eceef1;
-$steel-300:           #9aa4b2;
-$steel-500:           #4a5568;   // primary chrome accent
-$steel-700:           #333a47;
-$steel-900:           #1f232b;
+// ---- Structural / chrome (slate blue-gray) ----
+$steel-100:           #e9edf2;
+$steel-300:           #a3aec2;
+$steel-500:           #7c8ba1;   // primary chrome accent
+$steel-700:           #4c5666;
+$steel-900:           #262b34;
 
-// ---- Accent: arterial red (use sparingly — status, flags, emphasis) ----
-$red-100:              #f3d9dc;
-$red-300:              #c2545f;
-$red-500:              #8b1a2b;   // primary accent
-$red-700:              #611420;
-$red-900:              #3d0d15;
+// ---- Accent: muted teal (use sparingly — CTAs, active states, emphasis) ----
+$accent-100:           #d9ede9;
+$accent-300:           #7fc2b5;
+$accent-500:           #5fb3a3;   // primary accent
+$accent-700:           #3d8577;
+$accent-900:           #235148;
 
 // ---- Borders & dividers ----
 $border-subtle:       rgba($text-primary, 0.08);
 $border-default:      rgba($text-primary, 0.14);
 $border-strong:       rgba($text-primary, 0.24);
-$border-accent:        rgba($red-500, 0.5);
+$border-accent:        rgba($accent-500, 0.5);
+$border-radius: 5px;
 
 // ---- Semantic status colors (for POV flags, tension markers, etc.) ----
-$status-flag:          $red-500;    // e.g. POV violation, continuity break
+$status-danger:      #a14a4a;    // muted brick red — kept separate from the calm accent
+$status-flag:          $status-danger;   // e.g. POV violation, continuity break
 $status-warning:      #b5842a;    // tarnished gold — soft warning, style drift
 $status-info:           $steel-300;  // neutral annotation
 $status-ok:              #3f6e52;    // muted green — passed check, resolved flag
@@ -47,15 +49,15 @@ $status-ok:              #3f6e52;    // muted green — passed check, resolved f
 // ---- Interactive elements ----
 $link-default:          $steel-300;
 $link-hover:            color.scale($steel-300, $lightness: 34.38%);
-$button-primary-bg:     $red-500;
-$button-primary-hover: $red-700;
-$button-primary-text:  $text-primary;
+$button-primary-bg:     $accent-500;
+$button-primary-hover: $accent-700;
+$button-primary-text:  $text-inverse;   // dark text for contrast on the lighter accent
 $button-secondary-bg:    $bg-tertiary;
 $button-secondary-text: $text-primary;
 
 // ---- Focus & selection ----
-$focus-ring:            rgba($red-500, 0.6);
-$selection-bg:          rgba($red-500, 0.25);
+$focus-ring:            rgba($accent-500, 0.6);
+$selection-bg:          rgba($accent-500, 0.25);
 $selection-text:        $text-primary;
 
 // ---- Shadows (subtle, since base is already dark) ----
@@ -69,17 +71,17 @@ $scrollbar-thumb:      $steel-700;
 $scrollbar-thumb-hover: $steel-500;
 
 // ---- Code / monospace panels (if visualizing raw text/markup) ----
-$code-bg:               #131316;
-$code-text:             #d4cfc4;
+$code-bg:               #15181d;
+$code-text:             #ccd3da;
 $code-comment:          $text-tertiary;
-$code-highlight-line:  rgba($red-500, 0.12);
+$code-highlight-line:  rgba($accent-500, 0.12);
 
 // ---- Root export (CSS custom properties, optional bridge) ----
 :root {
   --bg-primary: #{$bg-primary};
   --bg-secondary: #{$bg-secondary};
   --text-primary: #{$text-primary};
-  --accent-red: #{$red-500};
+  --accent-primary: #{$accent-500};
   --steel-500: #{$steel-500};
   --border-default: #{$border-default};
 }
