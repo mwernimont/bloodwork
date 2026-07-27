@@ -1,0 +1,85 @@
+// ============================================================
+// BLOODWORK — Clinical Noir Theme
+// SCSS variables for prose visualizer / reference tooling
+// ============================================================
+
+@use "sass:color";
+
+// ---- Base surfaces ----
+$bg-primary:        #0d0d0f;   // main background, near-black charcoal
+$bg-secondary:       #16161a;   // elevated panels, cards
+$bg-tertiary:        #1e1e23;   // nested panels, code blocks, inset areas
+$bg-hover:            #232329;   // hover state on interactive surfaces
+$bg-active:           #2a2a31;   // pressed/active state
+
+// ---- Text ----
+$text-primary:        #e8e4dc;   // bone white — main body text
+$text-secondary:      #a8a49c;   // muted bone — secondary text, captions
+$text-tertiary:       #6e6b66;   // dim — placeholders, disabled text
+$text-inverse:        #0d0d0f;   // text on light/accent backgrounds
+
+// ---- Structural / chrome (steel blue-gray) ----
+$steel-100:           #eceef1;
+$steel-300:           #9aa4b2;
+$steel-500:           #4a5568;   // primary chrome accent
+$steel-700:           #333a47;
+$steel-900:           #1f232b;
+
+// ---- Accent: arterial red (use sparingly — status, flags, emphasis) ----
+$red-100:              #f3d9dc;
+$red-300:              #c2545f;
+$red-500:              #8b1a2b;   // primary accent
+$red-700:              #611420;
+$red-900:              #3d0d15;
+
+// ---- Borders & dividers ----
+$border-subtle:       rgba($text-primary, 0.08);
+$border-default:      rgba($text-primary, 0.14);
+$border-strong:       rgba($text-primary, 0.24);
+$border-accent:        rgba($red-500, 0.5);
+
+// ---- Semantic status colors (for POV flags, tension markers, etc.) ----
+$status-flag:          $red-500;    // e.g. POV violation, continuity break
+$status-warning:      #b5842a;    // tarnished gold — soft warning, style drift
+$status-info:           $steel-300;  // neutral annotation
+$status-ok:              #3f6e52;    // muted green — passed check, resolved flag
+
+// ---- Interactive elements ----
+$link-default:          $steel-300;
+$link-hover:            color.scale($steel-300, $lightness: 34.38%);
+$button-primary-bg:     $red-500;
+$button-primary-hover: $red-700;
+$button-primary-text:  $text-primary;
+$button-secondary-bg:    $bg-tertiary;
+$button-secondary-text: $text-primary;
+
+// ---- Focus & selection ----
+$focus-ring:            rgba($red-500, 0.6);
+$selection-bg:          rgba($red-500, 0.25);
+$selection-text:        $text-primary;
+
+// ---- Shadows (subtle, since base is already dark) ----
+$shadow-sm:  0 1px 2px rgba(#000, 0.4);
+$shadow-md:  0 4px 12px rgba(#000, 0.5);
+$shadow-lg:  0 12px 32px rgba(#000, 0.6);
+
+// ---- Scrollbar (optional, for a cohesive feel) ----
+$scrollbar-track:      $bg-primary;
+$scrollbar-thumb:      $steel-700;
+$scrollbar-thumb-hover: $steel-500;
+
+// ---- Code / monospace panels (if visualizing raw text/markup) ----
+$code-bg:               #131316;
+$code-text:             #d4cfc4;
+$code-comment:          $text-tertiary;
+$code-highlight-line:  rgba($red-500, 0.12);
+
+// ---- Root export (CSS custom properties, optional bridge) ----
+:root {
+  --bg-primary: #{$bg-primary};
+  --bg-secondary: #{$bg-secondary};
+  --text-primary: #{$text-primary};
+  --accent-red: #{$red-500};
+  --steel-500: #{$steel-500};
+  --border-default: #{$border-default};
+}
