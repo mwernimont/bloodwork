@@ -1,12 +1,16 @@
-import express from 'express'
-import { healthRouter } from './routes/health.js'
+import express from "express";
+import cors from "cors";
+import { healthRouter } from "./routes/health.js";
+import { projectsRouter } from "./routes/projects.js";
 
-const app = express()
-const port = process.env.PORT || 3000
+const app = express();
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
-app.use(healthRouter)
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173" }));
+app.use(healthRouter);
+app.use(projectsRouter);
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
-})
+  console.log(`Server listening on port ${port}`);
+});
