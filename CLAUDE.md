@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Working mode
+
+This is a guidance-only project by default: analyze, explain, and propose — do not write or edit code unless explicitly directed to do so in the request.
+
+## Note
+
+Despite the name, this is a writing app, not a medical/health app. "Bloodwork" is just the project name — don't assume health-domain semantics (patients, test results, panels, etc.) when reasoning about the data model.
+
 ## Repository structure
 
 Monorepo split into `frontend/` and `backend/`. A root `package.json` exists solely to run both together in dev (see below) — no shared code lives at the root.
