@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predev": "docker info > /dev/null 2>&1 || colima start",
     "dev": "docker compose -f backend/docker-compose.yml up -d && concurrently -n backend,frontend -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
