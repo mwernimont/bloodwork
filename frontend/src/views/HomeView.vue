@@ -12,13 +12,16 @@
     </button>
     <div v-if="projects.length > 0" id="projects">
       <template v-for="proj in projects" :key="proj.id">
-        <div class="card">
+        <div class="card" @click="router.push(`/project/${proj.id}`)">
           <div class="card-options">
             <button class="card-option">
-              <Pencil :size="15" @click="router.push(`/edit-project/${proj.id}`)" />
+              <Pencil
+                :size="15"
+                @click.stop="router.push(`/edit-project/${proj.id}`)"
+              />
             </button>
             <button class="card-option delete">
-              <Trash2 :size="15" @click="confirmDelete(proj)" />
+              <Trash2 :size="15" @click.stop="confirmDelete(proj)" />
             </button>
           </div>
           <div class="card-title">
@@ -95,6 +98,7 @@ onMounted(async () => {
   border: 1px solid #fff;
   border-radius: 10px;
   min-width: 250px;
+  cursor: pointer;
   p {
     padding: 0;
     margin: 0;
