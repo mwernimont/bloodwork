@@ -4,6 +4,7 @@ import { buildSetClause } from "../db/buildSetClause.js";
 
 export const projectsRouter = Router();
 
+// List all projects, newest first
 projectsRouter.get("/projects", async (req, res) => {
   try {
     const result = await query(
@@ -15,6 +16,7 @@ projectsRouter.get("/projects", async (req, res) => {
   }
 });
 
+// Fetch a single project by id, for the edit view
 projectsRouter.get("/projects/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -30,6 +32,7 @@ projectsRouter.get("/projects/:id", async (req, res) => {
   }
 });
 
+// Create a new project
 projectsRouter.post("/projects", async (req, res) => {
   const { name, description } = req.body;
 
@@ -50,6 +53,7 @@ projectsRouter.post("/projects", async (req, res) => {
   }
 });
 
+// Partially update a project (only the fields provided in the body)
 projectsRouter.patch("/projects/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -91,6 +95,7 @@ projectsRouter.patch("/projects/:id", async (req, res) => {
   }
 });
 
+// Delete a project (cascades to its characters)
 projectsRouter.delete("/projects/:id", async (req, res) => {
   const { id } = req.params;
   try {
