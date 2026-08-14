@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { query } from "../db/index.js";
+import { buildSetClause } from "../db/buildSetClause.js";
 
 export const projectsRouter = Router();
 
@@ -14,8 +15,30 @@ projectsRouter.get("/projects", async (req, res) => {
   }
 });
 
+projectsRouter.get("/projects/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await query("SELECT * FROM projects WHERE id = $1", [id]);
+    if (result.rows.length === 0) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Project ID does not exist" });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ status: "error", message: err.message });
+  }
+});
+
 projectsRouter.post("/projects", async (req, res) => {
   const { name, description } = req.body;
+
+  if (typeof name !== "string" || name.trim().length === 0) {
+    return res
+      .status(400)
+      .json({ status: "error", message: "Name is required" });
+  }
+
   try {
     const result = await query(
       "INSERT INTO projects (name, description) VALUES ($1, $2) RETURNING *",
@@ -27,23 +50,23 @@ projectsRouter.post("/projects", async (req, res) => {
   }
 });
 
-projectsRouter.patch("/projects/:id", async (res, req) => {
+projectsRouter.patch("/projects/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, description } = req.body;
 
-  const fields = [];
-  const values = [];
-
-  let i = 1;
-
-  if (name !== undefined) {
-    fields.push(`name = $${i++}`);
-    values.push(name);
+  if (
+    req.body.name !== undefined &&
+    (typeof req.body.name !== "string" || req.body.name.trim().length === 0)
+  ) {
+    return res
+      .status(400)
+      .json({ status: "error", message: "Name cannot be empty" });
   }
-  if (description !== undefined) {
-    fields.push(`description = $${i++}`);
-    values.push(description);
-  }
+
+  const allowedFields = ["name", "description"];
+  const { fields, values, nextIndex } = buildSetClause(
+    req.body,
+    allowedFields,
+  );
 
   if (fields.length === 0) {
     return res
@@ -54,7 +77,7 @@ projectsRouter.patch("/projects/:id", async (res, req) => {
 
   try {
     const result = await query(
-      `UPDATE projects SET ${fields.join(", ")} WHERE id = $${i} RETURNING *`,
+      `UPDATE projects SET ${fields.join(", ")} WHERE id = $${nextIndex} RETURNING *`,
       values,
     );
     if (result.rows.length === 0) {

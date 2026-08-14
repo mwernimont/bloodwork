@@ -15,7 +15,7 @@
         <div class="card">
           <div class="card-options">
             <button class="card-option">
-              <Pencil :size="15" />
+              <Pencil :size="15" @click="router.push(`/edit-project/${proj.id}`)" />
             </button>
             <button class="card-option delete">
               <Trash2 :size="15" @click="confirmDelete(proj)" />
