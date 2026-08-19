@@ -26,7 +26,7 @@ This starts Postgres (`docker compose up -d` in `backend/`), the backend (`nodem
 
 ## Backend (`backend/`)
 
-Node/Express API backed by Postgres, run via Docker Compose. No ORM — raw SQL through `pg`. No linter, formatter, or test runner configured yet.
+Node/Express API backed by Postgres, run via Docker Compose. DB access goes through Prisma ORM (`@prisma/client` + `prisma`). No linter, formatter, or test runner configured yet.
 
 ### Commands
 
@@ -36,6 +36,8 @@ Run from `backend/`:
 docker compose up -d   # start Postgres (must be running before the API)
 npm run dev              # start the API with nodemon (auto-restarts on .js changes)
 npm run start             # start the API without auto-restart
+npm run db:migrate       # create/apply a Prisma migration from schema.prisma changes
+npm run db:generate      # regenerate the Prisma client after schema changes
 docker compose down     # stop Postgres
 ```
 
@@ -43,13 +45,10 @@ docker compose down     # stop Postgres
 
 - **Entry point**: `src/server.js` — sets up Express, `express.json()`, `cors` (currently locked to `http://localhost:5173`, the Vite dev origin — update if the frontend port changes), and mounts routers.
 - **Routes**: one file per resource in `src/routes/` (e.g. `health.js`, `projects.js`), each exporting a `Router` instance mounted in `server.js`.
-- **DB access**: `src/db/index.js` exports a `pg.Pool`-backed `query(text, params)` helper. Always use parameterized queries (`$1`, `$2`, ...) — never string-concatenate values into SQL.
-- **Migrations**: plain numbered `.sql` files in `src/db/migrations/` (`001_init.sql`, `002_add_projects.sql`, ...), each a forward-only step. There is no migration tracking tool yet — files are applied by hand and are not re-run automatically:
-  ```sh
-  docker exec -i backend-db-1 psql -U bloodwork -d bloodwork < src/db/migrations/00N_name.sql
-  ```
-  Write `CREATE TABLE IF NOT EXISTS` (as the existing migrations do) so re-running a file is harmless. Never edit an already-applied migration file — add a new one instead.
-- **Local Postgres**: `docker-compose.yml` runs `postgres:16` with dev credentials (`bloodwork`/`dev`), matched by `.env`/`.env.example` (`DATABASE_URL`). Data persists in a named Docker volume across restarts.
+- **DB access**: `src/db/index.js` builds a `PrismaClient` using the `@prisma/adapter-pg` driver adapter (required explicitly in Prisma 7) and exports `prisma` and the `Prisma` namespace (used for error checks like `Prisma.PrismaClientKnownRequestError` with code `P2025` for not-found on update/delete). Models are defined in `prisma/schema.prisma`; fields are `camelCase` in JS and mapped (`@map`) to the underlying `snake_case` columns — API responses are camelCase.
+- **Generated client**: `prisma generate` (run automatically by `prisma migrate dev`, or manually via `npm run db:generate`) emits TypeScript into `src/generated/prisma/` (gitignored). Node's native TS type-stripping lets plain `.js` files import it directly — no build step.
+- **Migrations**: managed by Prisma under `prisma/migrations/`, one timestamped folder per migration. Change `prisma/schema.prisma`, then run `npm run db:migrate` (prompts for a migration name) to generate and apply the SQL. Never hand-edit an already-applied migration folder — change the schema and create a new migration instead.
+- **Local Postgres**: `docker-compose.yml` runs `postgres:16` with dev credentials (`bloodwork`/`dev`), matched by `.env`/`.env.example` (`DATABASE_URL`, also referenced by `prisma.config.ts`). Data persists in a named Docker volume across restarts.
 
 ### Conventions
 

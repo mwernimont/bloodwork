@@ -1,11 +1,7 @@
-import pg from 'pg'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { PrismaClient, Prisma } from '../generated/prisma/client.ts'
 
-const { Pool } = pg
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
 
-export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-})
-
-export function query(text, params) {
-  return pool.query(text, params)
-}
+export const prisma = new PrismaClient({ adapter })
+export { Prisma }
