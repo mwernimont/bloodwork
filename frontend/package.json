@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formkit/vue": "^2.1.2",
     "@lucide/vue": "^1.27.0",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"

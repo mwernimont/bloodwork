@@ -1,0 +1,24 @@
+[
+  {
+    "$formkit": "form",
+    "id": "projects-form",
+    "actions": false,
+    "onSubmit": "$onSubmit",
+    "value": "$initialValue",
+    "children": [
+      {
+        "$formkit": "text",
+        "name": "name",
+        "label": "Project Name",
+        "placeholder": "Project Name",
+        "validation": "required|length:0,255"
+      },
+      {
+        "$formkit": "textarea",
+        "name": "description",
+        "label": "Project Description",
+        "placeholder": "Project Description"
+      }
+    ]
+  }
+]

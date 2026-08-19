@@ -1,7 +1,7 @@
 <template>
-  <ProjectForm />
+  <DynamicForm schema-name="projects" />
 </template>
 
 <script setup>
-import ProjectForm from "@/components/ProjectForm.vue";
+import DynamicForm from "@/components/DynamicForm.vue";
 </script>
