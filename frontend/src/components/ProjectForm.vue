@@ -70,21 +70,43 @@ const submit = async () => {
 }
 
 #project-form {
-  border: 1px solid theme.$border-strong;
-  padding: 10px;
+  background: theme.$bg-secondary;
+  border: 1px solid theme.$border-default;
+  padding: 20px;
   border-radius: theme.$border-radius;
-  width: 50vw;
+  width: min(50vw, 480px);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+
+  h2 {
+    font-family: theme.$font-display;
+    font-style: italic;
+    font-weight: 500;
+    color: theme.$accent-300;
+    margin-bottom: 6px;
+  }
+
   input,
   textarea {
-    background: theme.$bg-secondary;
-    border: 1px solid theme.$border-strong;
+    background: theme.$bg-tertiary;
+    border: 1px solid theme.$border-default;
     color: theme.$text-primary;
+    font-family: theme.$font-body;
     padding: 10px;
     border-radius: theme.$border-radius;
     max-width: 100%;
+    transition: border-color 0.15s ease;
+
+    &::placeholder {
+      color: theme.$text-tertiary;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: theme.$border-accent;
+      box-shadow: 0 0 0 3px theme.$focus-ring;
+    }
   }
 }
 
@@ -95,10 +117,15 @@ const submit = async () => {
   .project-form-action {
     width: 50%;
     padding: 10px;
+    border: none;
     border-radius: theme.$border-radius;
     cursor: pointer;
     font-size: 1rem;
     color: theme.$text-primary;
+    transition: filter 0.15s ease;
+    &:hover:not(:disabled) {
+      filter: brightness(1.12);
+    }
     &:disabled {
       cursor: not-allowed;
       opacity: 0.5;

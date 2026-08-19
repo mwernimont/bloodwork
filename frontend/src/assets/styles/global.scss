@@ -8,23 +8,24 @@ body {
   padding: 0;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4 {
   margin: 0;
+  font-family: theme.$font-display;
+  font-weight: 600;
 }
 
 body {
-  background-color: theme.$bg-primary;
+  background: theme.$bg-primary;
   color: theme.$text-primary;
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
+  font-family: theme.$font-body;
 }
 
 #app {
   min-height: 100vh;
+}
+
+button {
+  font-family: theme.$font-body;
 }
 
 ::selection {
