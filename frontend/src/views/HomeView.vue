@@ -7,10 +7,7 @@
   />
   <div id="projects-container">
     <h1 id="projects-heading">Bloodwork</h1>
-    <button id="add-project" @click="router.push('/add-project')">
-      <Plus :size="15" />
-      Add Project
-    </button>
+    <AddButton route="/add-project" label="Project" />
     <div v-if="projects.length > 0" id="projects">
       <template v-for="(proj, i) in projects" :key="proj.id">
         <div
@@ -45,8 +42,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { Plus, Trash2, Pencil } from "@lucide/vue";
+import { Trash2, Pencil } from "@lucide/vue";
 import Modal from "@/components/Modal.vue";
+import AddButton from "@/components/AddButton.vue";
 import { useDeleteConfirmation } from "@/composables/useDeleteConfirmation.js";
 const router = useRouter();
 const projects = ref([]);
@@ -87,23 +85,6 @@ onMounted(async () => {
   letter-spacing: 0.5px;
 }
 
-#add-project {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: theme.$accent-500;
-  color: theme.$text-primary;
-  font-weight: 600;
-  border-radius: theme.$border-radius;
-  padding: 10px 16px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  &:hover {
-    background: theme.$accent-700;
-  }
-}
-
 #empty-state {
   color: theme.$text-tertiary;
   font-style: italic;
@@ -133,7 +114,9 @@ onMounted(async () => {
   border-radius: theme.$border-radius;
   cursor: pointer;
   animation: card-in 0.35s ease backwards;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
   p {
     padding: 0;
     margin: 0;
@@ -180,7 +163,9 @@ onMounted(async () => {
   background: transparent;
   color: theme.$text-tertiary;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
   &:hover {
     background: theme.$bg-hover;
     color: theme.$text-primary;
