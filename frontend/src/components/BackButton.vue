@@ -17,15 +17,20 @@ function goBack() {
 </script>
 <style lang="scss" scoped>
 button {
-  border: none;
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid theme.$border-default;
+  background: theme.$bg-secondary;
+  color: theme.$text-secondary;
+  padding: 8px;
+  border-radius: theme.$border-radius;
   margin-bottom: 10px;
   cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
   &:hover {
-    background: darkgray;
-    color: #fff;
+    background: theme.$bg-hover;
+    color: theme.$text-primary;
   }
 }
 </style>

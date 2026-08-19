@@ -1,78 +1,83 @@
 // ============================================================
-// BLOODWORK — Dark Slate Theme
+// BLOODWORK — Ink & Brass Theme
+// A writer's desk after dark: warm charcoal, aged gold, worn paper.
 // SCSS variables for prose visualizer / reference tooling
 // ============================================================
 
 @use "sass:color";
 
-// ---- Base surfaces ----
-$bg-primary:        #0b0d11;   // main background, near-black navy
-$bg-secondary:       #171b22;   // elevated panels, cards — clear step up from primary
-$bg-tertiary:        #232935;   // nested panels, code blocks, inset areas
-$bg-hover:            #303744;   // hover state on interactive surfaces
-$bg-active:           #3d4655;   // pressed/active state
+// ---- Type ----
+$font-display: "Fraunces", Georgia, serif;
+$font-body:      "Manrope", system-ui, sans-serif;
+
+// ---- Base surfaces (warm near-black, not cool navy) ----
+$bg-primary:        #0e0b09;   // main background, ink-black with a warm cast
+$bg-secondary:       #1c1712;   // elevated panels, cards
+$bg-tertiary:        #2a221a;   // nested panels, code blocks, inset areas
+$bg-hover:            #382e22;   // hover state on interactive surfaces
+$bg-active:           #47392a;   // pressed/active state
 
 // ---- Text ----
-$text-primary:        #e4e8ed;   // soft white — main body text
-$text-secondary:      #a3acb8;   // muted slate — secondary text, captions
-$text-tertiary:       #6b7480;   // dim — placeholders, disabled text
-$text-inverse:        #12151a;   // text on light/accent backgrounds
+$text-primary:        #ede4d6;   // warm parchment white — main body text
+$text-secondary:      #b6a992;   // muted tan — secondary text, captions
+$text-tertiary:       #7d7160;   // dim — placeholders, disabled text
+$text-inverse:        #17120c;   // text on light/accent backgrounds
 
-// ---- Structural / chrome (slate blue-gray) ----
-$steel-100:           #e9edf2;
-$steel-300:           #a3aec2;
-$steel-500:           #7c8ba1;   // primary chrome accent
-$steel-700:           #4c5666;
-$steel-900:           #262b34;
+// ---- Structural / chrome (warm umber) ----
+$umber-100:           #f1e8d9;
+$umber-300:           #cbb99a;
+$umber-500:           #a3906f;   // primary chrome accent
+$umber-700:           #6b5a41;
+$umber-900:           #2e2618;
 
-// ---- Accent: muted teal (use sparingly — CTAs, active states, emphasis) ----
-$accent-100:           #d9ede9;
-$accent-300:           #7fc2b5;
-$accent-500:           #5fb3a3;   // primary accent
-$accent-700:           #3d8577;
-$accent-900:           #235148;
+// ---- Accent: flat cobalt blue (use sparingly — CTAs, active states, emphasis) ----
+$accent-100:           #dbe6ff;
+$accent-300:           #8fabff;
+$accent-500:           #4d79ff;   // primary accent
+$accent-700:           #3457c4;
+$accent-900:           #1f3585;
 
 // ---- Borders & dividers ----
 $border-subtle:       rgba($text-primary, 0.08);
 $border-default:      rgba($text-primary, 0.14);
-$border-strong:       rgba($text-primary, 0.24);
+$border-strong:       rgba($text-primary, 0.26);
 $border-accent:        rgba($accent-500, 0.5);
-$border-radius: 5px;
+$border-radius: 8px;
 
 // ---- Semantic status colors (for POV flags, tension markers, etc.) ----
-$status-danger:      #a14a4a;    // muted brick red — kept separate from the calm accent
+$status-danger:      #a8503f;    // oxblood — kept separate from the accent
 $status-flag:          $status-danger;   // e.g. POV violation, continuity break
 $status-warning:      #b5842a;    // tarnished gold — soft warning, style drift
-$status-info:           $steel-300;  // neutral annotation
-$status-ok:              #3f6e52;    // muted green — passed check, resolved flag
+$status-info:           $umber-300;  // neutral annotation
+$status-ok:              #5f7a4d;    // moss green — passed check, resolved flag
 
 // ---- Interactive elements ----
-$link-default:          $steel-300;
-$link-hover:            color.scale($steel-300, $lightness: 34.38%);
+$link-default:          $umber-300;
+$link-hover:            color.scale($umber-300, $lightness: 30%);
 $button-primary-bg:     $accent-500;
 $button-primary-hover: $accent-700;
-$button-primary-text:  $text-inverse;   // dark text for contrast on the lighter accent
+$button-primary-text:  $text-primary;   // light text for contrast on the mid-tone accent
 $button-secondary-bg:    $bg-tertiary;
 $button-secondary-text: $text-primary;
 
 // ---- Focus & selection ----
-$focus-ring:            rgba($accent-500, 0.6);
-$selection-bg:          rgba($accent-500, 0.25);
+$focus-ring:            rgba($accent-500, 0.55);
+$selection-bg:          rgba($accent-500, 0.28);
 $selection-text:        $text-primary;
 
-// ---- Shadows (subtle, since base is already dark) ----
+// ---- Shadows (warm-tinted, since base is already dark) ----
 $shadow-sm:  0 1px 2px rgba(#000, 0.4);
-$shadow-md:  0 4px 12px rgba(#000, 0.5);
-$shadow-lg:  0 12px 32px rgba(#000, 0.6);
+$shadow-md:  0 6px 16px rgba(#0a0603, 0.5);
+$shadow-lg:  0 16px 40px rgba(#0a0603, 0.6);
 
 // ---- Scrollbar (optional, for a cohesive feel) ----
 $scrollbar-track:      $bg-primary;
-$scrollbar-thumb:      $steel-700;
-$scrollbar-thumb-hover: $steel-500;
+$scrollbar-thumb:      $umber-700;
+$scrollbar-thumb-hover: $umber-500;
 
 // ---- Code / monospace panels (if visualizing raw text/markup) ----
-$code-bg:               #15181d;
-$code-text:             #ccd3da;
+$code-bg:               #16120d;
+$code-text:             #d9cdb8;
 $code-comment:          $text-tertiary;
 $code-highlight-line:  rgba($accent-500, 0.12);
 
@@ -82,6 +87,6 @@ $code-highlight-line:  rgba($accent-500, 0.12);
   --bg-secondary: #{$bg-secondary};
   --text-primary: #{$text-primary};
   --accent-primary: #{$accent-500};
-  --steel-500: #{$steel-500};
+  --umber-500: #{$umber-500};
   --border-default: #{$border-default};
 }
