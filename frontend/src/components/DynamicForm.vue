@@ -24,7 +24,9 @@ import { CheckIcon, X } from "@lucide/vue";
 
 const props = defineProps({
   schemaName: { type: String, required: true },
+  endpoint: { type: String, required: true },
   project: { type: Object, default: null },
+  redirectTo: { type: String, default: "/" },
 });
 
 const schema = ref([]);
@@ -36,16 +38,14 @@ const formId = computed(() => schema.value[0]?.id);
 const initialValue = computed(() => props.project ?? {});
 
 const onSubmit = async (data) => {
-  const url = isEdit
-    ? `http://localhost:3000/projects/${props.project.id}`
-    : "http://localhost:3000/projects";
+  const url = isEdit ? `${props.endpoint}/${props.project.id}` : props.endpoint;
 
   await fetch(url, {
     method: isEdit ? "PATCH" : "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  router.push("/");
+  router.push(props.redirectTo);
 };
 
 onMounted(async () => {

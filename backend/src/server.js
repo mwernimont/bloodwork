@@ -3,6 +3,7 @@ import cors from "cors";
 import { healthRouter } from "./routes/health.js";
 import { projectsRouter } from "./routes/projects.js";
 import { charactersRouter } from "./routes/characters.js";
+import { relationshipsRouter } from "./routes/relationships.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +13,7 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use(healthRouter);
 app.use(projectsRouter);
 app.use(charactersRouter);
+app.use(relationshipsRouter);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

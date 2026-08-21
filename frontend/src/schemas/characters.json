@@ -1,0 +1,73 @@
+[
+  {
+    "$formkit": "form",
+    "id": "characters-form",
+    "actions": false,
+    "onSubmit": "$onSubmit",
+    "value": "$initialValue",
+    "children": [
+      {
+        "$formkit": "text",
+        "name": "name",
+        "label": "Name",
+        "placeholder": "Character Name",
+        "validation": "required|length:0,255"
+      },
+      {
+        "$formkit": "text",
+        "name": "race",
+        "label": "Race",
+        "placeholder": "Race"
+      },
+      {
+        "$formkit": "text",
+        "name": "role",
+        "label": "Role / Archetype",
+        "placeholder": "Role / Archetype"
+      },
+      {
+        "$formkit": "text",
+        "name": "faction",
+        "label": "Faction",
+        "placeholder": "Knights Paragon, Dosque's Order..."
+      },
+      {
+        "$formkit": "select",
+        "name": "status",
+        "label": "Status",
+        "placeholder": "Select status",
+        "options": ["Alive", "Dead", "Missing", "Unknown"]
+      },
+      {
+        "$formkit": "textarea",
+        "name": "theLie",
+        "label": "The Lie",
+        "placeholder": "What they believe about themselves that isn't true"
+      },
+      {
+        "$formkit": "textarea",
+        "name": "theGoal",
+        "label": "The Goal",
+        "placeholder": "What they want"
+      },
+      {
+        "$formkit": "textarea",
+        "name": "presence",
+        "label": "Presence",
+        "placeholder": "Visual anchor, vocal quality, key habits"
+      },
+      {
+        "$formkit": "textarea",
+        "name": "combatAndKit",
+        "label": "Combat & Kit",
+        "placeholder": "Fighting style, signature weapon, battlefield role"
+      },
+      {
+        "$formkit": "textarea",
+        "name": "theWeb",
+        "label": "The Web",
+        "placeholder": "Relationships to other characters"
+      }
+    ]
+  }
+]

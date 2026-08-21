@@ -1,5 +1,8 @@
 <template>
-  <DynamicForm schema-name="projects" />
+  <DynamicForm
+    schema-name="projects"
+    endpoint="http://localhost:3000/projects"
+  />
 </template>
 
 <script setup>

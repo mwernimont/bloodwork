@@ -1,5 +1,10 @@
 <template>
-  <DynamicForm v-if="project" schema-name="projects" :project="project" />
+  <DynamicForm
+    v-if="project"
+    schema-name="projects"
+    endpoint="http://localhost:3000/projects"
+    :project="project"
+  />
 </template>
 
 <script setup>
