@@ -16,15 +16,10 @@
           @click="router.push(`/project/${proj.id}`)"
         >
           <div class="card-options">
-            <button class="card-option">
-              <Pencil
-                :size="15"
-                @click.stop="router.push(`/edit-project/${proj.id}`)"
-              />
-            </button>
-            <button class="card-option delete">
-              <Trash2 :size="15" @click.stop="confirmDelete(proj)" />
-            </button>
+            <CardActions
+              @edit="router.push(`/edit-project/${proj.id}`)"
+              @confirmDelete="confirmDelete(proj)"
+            />
           </div>
           <div class="card-title">
             <p>{{ proj.name }}</p>
@@ -42,9 +37,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { Trash2, Pencil } from "@lucide/vue";
 import Modal from "@/components/Modal.vue";
 import AddButton from "@/components/AddButton.vue";
+import CardActions from "@/components/CardActions.vue";
 import { useDeleteConfirmation } from "@/composables/useDeleteConfirmation.js";
 const router = useRouter();
 const projects = ref([]);
@@ -151,29 +146,5 @@ onMounted(async () => {
   gap: 6px;
   padding: 8px;
   border-bottom: 1px solid theme.$border-subtle;
-}
-
-.card-option {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border: none;
-  border-radius: 5px;
-  background: transparent;
-  color: theme.$text-tertiary;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
-  &:hover {
-    background: theme.$bg-hover;
-    color: theme.$text-primary;
-  }
-}
-
-.delete:hover {
-  background: rgba(theme.$status-danger, 0.2);
-  color: theme.$status-danger;
 }
 </style>
