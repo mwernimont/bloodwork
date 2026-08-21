@@ -85,6 +85,22 @@ onMounted(async () => {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
+    background: theme.$bg-tertiary;
+    border: 1px solid theme.$border-default;
+    color: theme.$text-primary;
+    font-family: theme.$font-body;
+    border-radius: theme.$border-radius;
+    transition: border-color 0.15s ease;
+
+    &::placeholder {
+      color: theme.$text-tertiary;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: theme.$border-accent;
+      box-shadow: 0 0 0 3px theme.$focus-ring;
+    }
   }
   textarea {
     min-height: 200px;
