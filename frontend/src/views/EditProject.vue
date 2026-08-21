@@ -1,11 +1,11 @@
 <template>
-  <ProjectForm v-if="project" :project="project" />
+  <DynamicForm v-if="project" schema-name="projects" :project="project" />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import ProjectForm from "@/components/ProjectForm.vue";
+import DynamicForm from "@/components/DynamicForm.vue";
 
 const route = useRoute();
 const project = ref(null);
