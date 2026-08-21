@@ -23,12 +23,29 @@ model Project {
 }
 
 model Character {
-  id        Int      @id @default(autoincrement())
-  projectId Int      @map("project_id")
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  name      String
-  metadata  Json     @default("{}")
-  createdAt DateTime @default(now()) @map("created_at")
+  id                Int                     @id @default(autoincrement())
+  projectId         Int                     @map("project_id")
+  project           Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name              String
+  faction           String?
+  metadata          Json                    @default("{}")
+  createdAt         DateTime                @default(now()) @map("created_at")
+  relationshipsFrom CharacterRelationship[] @relation("RelationshipsFrom")
+  relationshipsTo   CharacterRelationship[] @relation("RelationshipsTo")
 
   @@map("characters")
+}
+
+model CharacterRelationship {
+  id              Int       @id @default(autoincrement())
+  fromCharacterId Int       @map("from_character_id")
+  toCharacterId   Int       @map("to_character_id")
+  fromCharacter   Character @relation("RelationshipsFrom", fields: [fromCharacterId], references: [id], onDelete: Cascade)
+  toCharacter     Character @relation("RelationshipsTo", fields: [toCharacterId], references: [id], onDelete: Cascade)
+  category        String?
+  label           String?
+  description     String?
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  @@map("character_relationships")
 }

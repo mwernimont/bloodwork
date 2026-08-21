@@ -38,7 +38,7 @@ charactersRouter.get("/characters/:id", async (req, res) => {
 // Create a new character under a project; unrecognized body fields are stored as metadata
 charactersRouter.post("/projects/:projectId/characters", async (req, res) => {
   const { projectId } = req.params;
-  const { name, ...metadata } = req.body;
+  const { name, faction, ...metadata } = req.body;
 
   if (typeof name !== "string" || name.trim().length === 0) {
     return res
@@ -48,7 +48,7 @@ charactersRouter.post("/projects/:projectId/characters", async (req, res) => {
 
   try {
     const character = await prisma.character.create({
-      data: { projectId: Number(projectId), name, metadata },
+      data: { projectId: Number(projectId), name, faction, metadata },
     });
     res.status(201).json(character);
   } catch (err) {
@@ -69,9 +69,10 @@ charactersRouter.patch("/characters/:id", async (req, res) => {
       .json({ status: "error", message: "Name cannot be empty" });
   }
 
-  const { name, metadata } = req.body;
+  const { name, faction, metadata } = req.body;
   const data = {
     ...(name !== undefined && { name }),
+    ...(faction !== undefined && { faction }),
     ...(metadata !== undefined && { metadata }),
   };
 
